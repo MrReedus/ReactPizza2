@@ -4,11 +4,11 @@ import Header from "./components/Header";
 import Categories from "./components/Categories";
 import Sort from "./components/Sort";
 import PizzaBlock from "./components/PizzaBlock";
-import logo from './img/pizza-logo.svg'
+import logo from './assets/img/pizza-logo.svg'
 
 function App() {
 
-и начинает писать логику
+
 
     const pizzas = [1,2,2]
     return (
