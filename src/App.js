@@ -6,11 +6,13 @@ import Sort from "./components/Sort";
 import PizzaBlock from "./components/PizzaBlock";
 import logo from './assets/img/pizza-logo.svg'
 
+import pizzas from './assets/pizzas.json'
+
+
+
 function App() {
 
 
-
-    const pizzas = [1,2,2]
     return (
         <div className="App">
             <div className="wrapper">
@@ -24,9 +26,22 @@ function App() {
                         </div>
                         <h2 className="content__title">Все пиццы</h2>
                         <div className="content__items">
-                            <PizzaBlock title="Мексиканская" price="500"/>
-                            <PizzaBlock title="Пепперони" price="670"/>
-                            <PizzaBlock title="Чикаго" price="900"/>
+
+                            {
+                                pizzas.map(pizza => {
+                                    return (
+                                        <PizzaBlock id ={pizza.id}
+                                                    title={pizza.title}
+                                                    imageUrl={pizza.imageUrl}
+                                                    price={pizza.price}
+                                                    sizes={pizza.sizes}
+                                                    types={pizza.types}
+                                        />
+                                    )
+                                })
+                            }
+
+
 
 
                         </div>
