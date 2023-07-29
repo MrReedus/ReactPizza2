@@ -17,17 +17,13 @@ function App() {
 
 
   useEffect(() => {
-      fetch('https://63ece635be929df00cb4a1e8.mockapi.io/items').then((response) => {
-          return response.json()
-      })
+      fetch('https://63ece635be929df00cb4a1e8.mockapi.io/items')
+          .then((response) => response.json())
           .then((arr) => {
-              console.log(arr)
               setItems(arr)
           })
   }, []) // запрос на сервер будет отправлять только один раз [] - значит при первом рендере
 
-
-получает и отрисовывает данные с сервера
 
     return (
         <div className="App">
