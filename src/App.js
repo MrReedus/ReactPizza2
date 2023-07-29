@@ -1,17 +1,33 @@
-
 import './scss/app.scss';
 import Header from "./components/Header";
 import Categories from "./components/Categories";
 import Sort from "./components/Sort";
 import PizzaBlock from "./components/PizzaBlock";
 import logo from './assets/img/pizza-logo.svg'
+import {useEffect, useState} from "react";
 
-import pizzas from './assets/pizzas.json'
+// import pizzas from './assets/pizzas.json'
+
 
 
 
 function App() {
 
+    const [items, setItems] = useState([])
+
+
+  useEffect(() => {
+      fetch('https://63ece635be929df00cb4a1e8.mockapi.io/items').then((response) => {
+          return response.json()
+      })
+          .then((arr) => {
+              console.log(arr)
+              setItems(arr)
+          })
+  }, []) // запрос на сервер будет отправлять только один раз [] - значит при первом рендере
+
+
+получает и отрисовывает данные с сервера
 
     return (
         <div className="App">
@@ -28,20 +44,14 @@ function App() {
                         <div className="content__items">
 
                             {
-                                pizzas.map(pizza => {
+                                items.map(pizza => {
                                     return (
-                                        <PizzaBlock id ={pizza.id}
-                                                    title={pizza.title}
-                                                    imageUrl={pizza.imageUrl}
-                                                    price={pizza.price}
-                                                    sizes={pizza.sizes}
-                                                    types={pizza.types}
+                                        <PizzaBlock
+                                            {...pizza} // разворачиваем все свойства объекта
                                         />
                                     )
                                 })
                             }
-
-
 
 
                         </div>
