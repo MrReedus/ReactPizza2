@@ -1,4 +1,4 @@
-@import '../variables' ;
+@import '../variables';
 
 .categories {
   ul {
@@ -27,5 +27,34 @@
         color: #fff;
       }
     }
+  }
+}
+
+@media (max-width: 768px) {
+  .categories {
+    ul {
+      flex-direction: column;
+    }
+    li {
+      width: 100%;
+    }
+  }
+
+  .content__top {
+    flex-direction: column;
+  }
+  .container {
+    flex-direction: column;
+    gap: 15px;
+  }
+  .sort {
+    //order: -1;
+    margin-top: 15px;
+  }
+  .content__items {
+    //align-items: center;
+    flex-direction: column;
+    margin: 0 auto;
+    max-width: 300px;
   }
 }
