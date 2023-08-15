@@ -3,12 +3,15 @@
 .categories {
   ul {
     display: flex;
+    max-width: 900px;
+    flex-wrap: wrap;
+    gap: 5px;
 
     li {
       background-color: #f9f9f9;
       padding: 13px 30px;
       border-radius: 30px;
-      margin-right: 10px;
+
       font-weight: bold;
       cursor: pointer;
       transition: background-color 0.1s ease-in-out;
@@ -30,23 +33,46 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 970px) {
+  .content__top {
+    flex-direction: column;
+  }
   .categories {
     ul {
+      flex-wrap: nowrap;
+      margin-bottom: 18px;
+      li {
+        padding: 8px 18px;
+        font-size: 14px;
+      }
+    }
+
+  }
+}
+
+@media (max-width: 768px) {
+  .categories {
+    max-width: 400px;
+
+    ul {
       flex-direction: column;
+      flex-wrap: nowrap;
     }
     li {
-      width: 100%;
+      max-width: 380px;
     }
   }
 
   .content__top {
     flex-direction: column;
+    max-width: 400px;
+    margin-right: 0;
   }
   .container {
-    flex-direction: column;
+    //flex-direction: column;
     gap: 15px;
   }
+  con
   .sort {
     //order: -1;
     margin-top: 15px;
