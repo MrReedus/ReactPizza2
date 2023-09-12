@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Sort = () => {
+const Sort = (props) => {
 
     const [collapsed, setCollapsed] = React.useState(false)
     const [selected, setSelected] = React.useState(0)
@@ -8,10 +8,12 @@ const Sort = () => {
     const list = ['популярности','цене','алфавиту']
 
 
-    const onClickSelected = (i) => {
+    const onClickSelected = (i, sortName) => {
         setSelected(i)
         setCollapsed(false)
+        props.sortCallBack(sortName)
     }
+
     return (
 
         <div className="sort">
@@ -38,7 +40,7 @@ const Sort = () => {
                             {
 
                                 list.map((sortName, i) => <li key={i}
-                                                        onClick={() =>  onClickSelected(i)}
+                                                        onClick={() =>  onClickSelected(i, sortName)}
                                                               className={i === selected ?'active' : ''}>{sortName} </li>)
                             }
                         </ul>
