@@ -1,18 +1,32 @@
 import React from 'react';
 
-const Sort = (props) => {
+
+const Sort = ({onClickSort, value}) => {
 
     const [collapsed, setCollapsed] = React.useState(false)
-    const [selected, setSelected] = React.useState(0)
-
-    const list = ['популярности','цене','алфавиту']
 
 
-    const onClickSelected = (i, sortName) => {
-        setSelected(i)
+    const sortList = [
+        {name: 'популярности (DESC)' , sortProperty: 'rating'},
+        {name: 'популярности (ASC)', sortProperty: '-rating'},
+        {name: 'цене (DESC)', sortProperty: 'price'},
+        {name: 'цене (ASC)', sortProperty: '-price'},
+        {name: 'алфавиту (DESC)', sortProperty: 'title'},
+        {name: 'алфавиту (ASC)', sortProperty: '-title'}
+    ]
+
+
+
+
+    const onClickSelected = (i) => {
+        onClickSort(i)
         setCollapsed(false)
-        props.sortCallBack(sortName)
+
     }
+
+    const sortItems = sortList.map((sortObj, i) => <li key={i}
+                                                       onClick={() => onClickSelected(sortObj)}
+                                                       className={value.sortProperty === sortObj.sortProperty ? 'active' : ''}>{sortObj.name} </li>)
 
     return (
 
@@ -31,19 +45,12 @@ const Sort = (props) => {
                     />
                 </svg>
                 <b>Сортировка по:</b>
-                <span onClick={()=>setCollapsed(!collapsed)}>{list[selected]}</span>
+                <span onClick={() => setCollapsed(!collapsed)}>{value.name}</span>
             </div>
             <div className="sort__popup">
                 {
                     collapsed && (
-                        <ul>
-                            {
-
-                                list.map((sortName, i) => <li key={i}
-                                                        onClick={() =>  onClickSelected(i, sortName)}
-                                                              className={i === selected ?'active' : ''}>{sortName} </li>)
-                            }
-                        </ul>
+                        <ul>{sortItems}</ul>
                     )
                 }
 
