@@ -3,6 +3,9 @@ import Categories from "../components/Categories";
 import Sort from "../components/Sort";
 import Skeleton from "../components/PizzaBlock/Skeleton";
 import PizzaBlock from "../components/PizzaBlock";
+import ReactPaginate from "react-paginate";
+import {logDOM} from "@testing-library/react";
+import Pagination from "../components/Pagination";
 
 
 const Home = ({searchValue}) => {
@@ -47,12 +50,9 @@ const Home = ({searchValue}) => {
                 </div>
                 <h2 className="content__title">Все пиццы</h2>
                 <div className="content__items">
-
-                    {
-                        isloading ? skeletons : pizzas
-                    }
-
+                    {isloading ? skeletons : pizzas}
                 </div>
+                <Pagination/>
             </div>
         </div>
     );
