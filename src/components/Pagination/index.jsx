@@ -2,15 +2,15 @@ import React from 'react';
 import ReactPaginate from "react-paginate";
 import styles from './pagination.module.scss'
 
-const Pagination = () => {
+const Pagination = ({ onChangePage }) => {
     return (
         <ReactPaginate
             className={styles.root}
             breakLabel="..."
             nextLabel=">"
-            onPageChange={e => console.log(e)}
-            pageRangeDisplayed={8}
-            pageCount={3}
+            onPageChange={e => onChangePage(e.selected + 1)}
+            pageRangeDisplayed={4}
+            pageCount={3} // захардкожили так как бэкэнд мокапи не отправляет количество страниц
             previousLabel="<"
             renderOnZeroPageCount={null}
         />

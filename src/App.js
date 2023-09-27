@@ -1,5 +1,5 @@
+import React from "react";
 import './scss/app.scss';
-
 import Header from "./components/Header";
 import logo from './assets/img/pizza-logo.svg'
 import Home from "./pages/Home";
@@ -11,27 +11,34 @@ import {useState} from "react";
 // import pizzas from './assets/pizzas.json'
 
 
+export const SearchContext = React.createContext();
+console.log(SearchContext)
+
 function App() {
-const [searchValue, setSearchValue] = useState('')
-    console.log(searchValue, 'changed')
+    const [searchValue, setSearchValue] = useState('')
+
     return (
         <div className="App">
             <div className="wrapper">
-                <Header logo={logo} searchValue={searchValue} setSearchValue={setSearchValue}/>
+                <SearchContext.Provider value={{searchValue, setSearchValue}}>
+                    <Header logo={logo}/>
 
-                <div className="content">
-                    <Routes>
-                        <Route path="/" element={<Home searchValue={searchValue}/>}/>
-                        <Route path="/cart" element={<Cart/>}/>
-                        <Route path="*" element={<NotFound/>}/>
+                    <div className="content">
+                        <Routes>
+                            <Route path="/" element={<Home/>}/>
+                            <Route path="/cart" element={<Cart/>}/>
+                            <Route path="*" element={<NotFound/>}/>
 
-                    </Routes>
+                        </Routes>
+
+                    </div>
+                </SearchContext.Provider>
 
 
-                </div>
             </div>
         </div>
-    );
+    )
+        ;
 }
 
 export default App;

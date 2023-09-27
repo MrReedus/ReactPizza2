@@ -6,13 +6,14 @@ import PizzaBlock from "../components/PizzaBlock";
 import ReactPaginate from "react-paginate";
 import {logDOM} from "@testing-library/react";
 import Pagination from "../components/Pagination";
+import {SearchContext} from "../App";
 
 
-const Home = ({searchValue}) => {
-
+const Home = () => {
+    const {searchValue} = React.useContext(SearchContext)
     const [items, setItems] = useState([])
     const [isloading, setIsloading] = useState(true)
-
+    const [currentPage, setCurrentPage] = React.useState(1)
     const [categoryId, setCategoryId] = React.useState(0)
     const [sortType, setSortType] = React.useState({
         name: "Популярности", sortProperty: 'rating'
@@ -26,13 +27,13 @@ const Home = ({searchValue}) => {
         const category = categoryId > 0 ? `category=${categoryId}` : '';
         const search = searchValue ? `&search=${searchValue}` : ''
 
-        fetch(`https://63ece635be929df00cb4a1e8.mockapi.io/items?${category}&sortBy=${sortBy}&order=${order}${search}`)
+        fetch(`https://63ece635be929df00cb4a1e8.mockapi.io/items?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`)
             .then((response) => response.json())
             .then((arr) => {
                 setItems(arr)
                 setIsloading(false)
             })
-    }, [categoryId, sortType, searchValue]) // запрос на сервер будет отправлять только один раз [] - значит при первом рендере
+    }, [categoryId, sortType, searchValue, currentPage]) // запрос на сервер будет отправлять только один раз [] - значит при первом рендере
 
     const pizzas = items.map((pizza) => <PizzaBlock key={pizza.id} {...pizza}/>)  // разворачиваем все свойства объекта
     const skeletons = [...new Array(6)].map((_, index) => <Skeleton key={index}/>)
@@ -52,7 +53,7 @@ const Home = ({searchValue}) => {
                 <div className="content__items">
                     {isloading ? skeletons : pizzas}
                 </div>
-                <Pagination/>
+                <Pagination onChangePage={(number) => setCurrentPage(number)}/>
             </div>
         </div>
     );

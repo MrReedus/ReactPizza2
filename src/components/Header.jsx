@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from "react-router-dom";
 import Search from "./Search";
 
-const Header = ({ logo, searchValue, setSearchValue }) => {
+const Header = ({ logo }) => {
     return (
         <div>
             <div className="header">
@@ -11,10 +11,10 @@ const Header = ({ logo, searchValue, setSearchValue }) => {
                         <img width="38" src={logo} alt="Pizza logo"/>
                         <div>
                             <h1>React Pizza</h1>
-                            <p>самая вкусная пицца во вселенной</p>
+                            <p>Cамая вкусная пицца во вселенной</p>
                         </div>
                     </Link>
-                    <Search searchValue={searchValue} setSearchValue={setSearchValue}/>
+                    <Search />
                     <div className="header__cart">
                         <Link to="/cart" className="button button--cart">
                             <span>520 ₽</span>
