@@ -7,15 +7,19 @@ import NotFound from "./pages/NotFound";
 import {Route, Routes} from "react-router-dom";
 import Cart from "./pages/Cart";
 import {useState} from "react";
+import { useSelector, useDispatch } from 'react-redux'
 
 // import pizzas from './assets/pizzas.json'
 
 
 export const SearchContext = React.createContext();
-console.log(SearchContext)
+
 
 function App() {
     const [searchValue, setSearchValue] = useState('')
+
+    const count = useSelector((state) => state.counter.value)
+    const dispatch = useDispatch()
 
     return (
         <div className="App">
